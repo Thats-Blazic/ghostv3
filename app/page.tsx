@@ -87,13 +87,9 @@ export default function HomePage() {
       <section className="relative px-6 py-24 md:py-32">
         <div className="mx-auto max-w-7xl">
           <SectionHeading
-            eyebrow={sr ? 'Reči klijenata' : 'Kind Words'}
-            title={sr ? 'Poverenje ambicioznih timova' : 'Loved by ambitious teams'}
-            subtitle={
-              sr
-                ? 'Uspeh merimo rezultatima i odnosima koje gradimo sa klijentima.'
-                : 'We measure success by the results and relationships we build with our clients.'
-            }
+            eyebrow="Creator voices"
+            title="Trusted by YouTubers we work with"
+            subtitle="Thumbnails, banners and visuals that help channels grow — in their own words."
           />
           <div className="mt-14">
             <TestimonialsCarousel />

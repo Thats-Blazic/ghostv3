@@ -26,13 +26,13 @@ export function TestimonialsContent() {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="mt-7 max-w-6xl text-balance font-heading text-5xl font-bold leading-[0.95] tracking-[-0.05em] sm:text-7xl lg:text-[7rem]"
           >
-            Strong work creates
+            Trusted by
             <br />
-            <span className="text-gradient">strong relationships.</span>
+            <span className="text-gradient">creators who grow.</span>
           </motion.h1>
           <p className="mt-10 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
-            The best measure of our work is what happens after launch: better
-            results, stronger brands and clients who choose to work with us again.
+            Thumbnails, banners and channel visuals for YouTubers who care about
+            quality — and about standing out in the feed.
           </p>
         </div>
       </section>
@@ -55,7 +55,7 @@ export function TestimonialsContent() {
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
             <div className="absolute bottom-6 left-6">
               <p className="font-heading text-xl font-semibold">{featured.name}</p>
-              <p className="mt-1 text-sm text-white/60">{featured.company}</p>
+              <p className="mt-1 text-sm text-white/60">{featured.channel}</p>
             </div>
           </div>
           <div className="relative flex min-h-[30rem] flex-col justify-between p-8 sm:p-12 lg:p-16">
@@ -86,12 +86,12 @@ export function TestimonialsContent() {
                 More kind words
               </p>
               <h2 className="mt-5 text-balance font-heading text-4xl font-semibold tracking-tight sm:text-6xl">
-                Trusted across industries and borders.
+                Voices from the channels we work with.
               </h2>
             </div>
             <p className="max-w-xl text-base leading-relaxed text-muted-foreground lg:justify-self-end">
-              Every testimonial reflects an open partnership, a shared standard
-              for quality and a commitment to meaningful outcomes.
+              Real feedback from YouTubers and creators who rely on us for
+              thumbnails, banners and visual identity.
             </p>
           </div>
 
@@ -126,7 +126,7 @@ export function TestimonialsContent() {
                   />
                   <div>
                     <p className="font-heading font-semibold">{testimonial.name}</p>
-                    <p className="text-sm text-muted-foreground">{testimonial.company}</p>
+                    <p className="text-sm text-muted-foreground">{testimonial.channel}</p>
                   </div>
                 </div>
               </motion.article>

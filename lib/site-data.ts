@@ -130,59 +130,77 @@ export type { PortfolioItem, PortfolioType } from './portfolio-data'
 export type Testimonial = {
   quote: string
   name: string
-  company: string
+  channel: string
   rating: number
   image: string
 }
 
+const THUB = '/testimonials/thub'
+
 export const TESTIMONIALS: Testimonial[] = [
   {
     quote:
-      'Ghost Force Studio delivered beyond our wildest expectations. Our conversion rate more than doubled within weeks of launch.',
-    name: 'Elena Márquez',
-    company: 'VP Product, Aurora',
+      'Thumbnails that actually get clicks. They understand moto content and our audience perfectly.',
+    name: 'ST Moto',
+    channel: 'YouTube · ST Moto',
     rating: 5,
-    image: '/testimonials/person-1.png',
+    image: '/testimonials/creators/st-moto.png',
   },
   {
     quote:
-      'The most professional creative team we have ever worked with. They understood our vision instantly and elevated it.',
-    name: 'Julien Rousseau',
-    company: 'Creative Director, Noir',
+      'Every banner and thumbnail feels on-brand. Views picked up from the first video with the new look.',
+    name: 'Moto Dnevnik',
+    channel: 'YouTube · Moto Dnevnik',
     rating: 5,
-    image: '/testimonials/person-2.png',
+    image: '/testimonials/creators/moto-dnevnik.png',
   },
   {
     quote:
-      'Every detail was considered. The animations, the performance, the brand — all flawless. Truly world-class work.',
-    name: 'Amara Okafor',
-    company: 'CEO, Verdant',
+      'They captured the energy of our channel instantly. Bold visuals, fast delivery, zero back-and-forth.',
+    name: 'LaVidaLoca',
+    channel: 'YouTube · LaVidaLoca',
     rating: 5,
-    image: '/testimonials/person-3.png',
+    image: '/testimonials/creators/lavadaloca.png',
   },
   {
     quote:
-      'They turned a complex technical product into a story that sells. Our best marketing investment to date.',
-    name: 'Devon Park',
-    company: 'Head of Growth, Quantum',
+      'Premium polish on every asset — thumbnails, overlays, channel art. Exactly the level we needed.',
+    name: 'Goldenito',
+    channel: 'YouTube · Goldenito',
     rating: 5,
-    image: '/testimonials/person-4.png',
+    image: '/testimonials/creators/goldenito.png',
   },
   {
     quote:
-      'Fast, reliable, and endlessly creative. Ghost Force feels like an extension of our own team.',
-    name: 'Marcus Lee',
-    company: 'Founder, Pulse',
+      'Best creative partner for our food channel. Thumbnails and branding that actually stand out.',
+    name: 'Gastro Trazilica',
+    channel: 'YouTube · Gastro Trazilica',
     rating: 5,
-    image: '/testimonials/person-5.png',
+    image: '/testimonials/creators/gastro-trazilica.png',
   },
   {
     quote:
-      'A rebrand that opened doors we could not open before. The quality of their work is simply unmatched.',
-    name: 'Sofia Bianchi',
-    company: 'CMO, Meridian',
+      'From idea to final file, everything is clean and upload-ready. We keep coming back.',
+    name: 'Krtoni',
+    channel: 'YouTube · Krtoni',
     rating: 5,
-    image: '/testimonials/person-6.png',
+    image: `${THUB}/krtoni.jpg`,
+  },
+  {
+    quote:
+      'Ghost Force gets YouTube. Strong hooks, readable text, and designs that stand out in the feed.',
+    name: 'Petar Cuts',
+    channel: 'YouTube · Petar Cuts',
+    rating: 5,
+    image: '/testimonials/creators/petar-cuts.png',
+  },
+  {
+    quote:
+      'Reliable, creative, and always on time. Our banners and thumbs finally look like one brand.',
+    name: 'Nauci Dizajn',
+    channel: 'YouTube · Nauci Dizajn',
+    rating: 5,
+    image: '/testimonials/creators/nauci-dizajn.png',
   },
 ]
 

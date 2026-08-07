@@ -57,7 +57,7 @@ export function TestimonialsCarousel() {
                 />
                 <div>
                   <p className="font-heading font-semibold">{t.name}</p>
-                  <p className="text-sm text-muted-foreground">{t.company}</p>
+                  <p className="text-sm text-muted-foreground">{t.channel}</p>
                 </div>
               </div>
             </motion.div>
