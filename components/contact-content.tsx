@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { ArrowDownRight, ArrowUpRight, Mail, MapPin, Phone } from 'lucide-react'
 import { FaBehance, FaGithub, FaInstagram, FaLinkedinIn } from 'react-icons/fa6'
 import { ContactForm } from '@/components/contact-form'
+import { Eyebrow } from '@/components/shared'
 import { CONTACT_INFO } from '@/lib/site-data'
 
 const socials = [
@@ -21,11 +22,19 @@ export function ContactContent() {
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <div className="grid-bg absolute inset-0 opacity-30 [mask-image:radial-gradient(ellipse_at_top,black,transparent_75%)]" />
           <div className="absolute left-[58%] top-10 h-[34rem] w-[34rem] rounded-full bg-primary/20 blur-[150px]" />
+          <motion.div
+            className="absolute left-[58%] top-10 h-[30rem] w-[30rem] opacity-50"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 32, repeat: Infinity, ease: 'linear' }}
+            style={{
+              background:
+                'conic-gradient(from 0deg, transparent 0%, rgba(192,132,252,0.35) 15%, transparent 35%, transparent 55%, rgba(124,58,237,0.3) 75%, transparent 100%)',
+              filter: 'blur(40px)',
+            }}
+          />
         </div>
         <div className="relative mx-auto max-w-7xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[color:var(--purple-3)]">
-            Start a conversation
-          </p>
+          <Eyebrow>Start a conversation</Eyebrow>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -113,17 +122,27 @@ export function ContactContent() {
       </section>
 
       <section className="border-y border-white/10 bg-white/[0.018] px-5 py-20 sm:px-8">
-        <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-3">
+        <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-3">
           {[
             ['01', 'Share the context', 'Goals, audience, scope and any useful references.'],
             ['02', 'Get a clear response', 'We reply with questions, fit and the best next step.'],
             ['03', 'Build the plan', 'Together we define scope, timing and investment.'],
-          ].map(([number, title, description]) => (
-            <article key={number} className="border-t border-white/10 pt-6">
-              <span className="font-heading text-xs text-[color:var(--purple-3)]">{number}</span>
-              <h3 className="mt-8 font-heading text-xl font-semibold">{title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{description}</p>
-            </article>
+          ].map(([number, title, description], index) => (
+            <motion.article
+              key={number}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ y: -6 }}
+              data-cursor="hover"
+              className="group relative overflow-hidden rounded-3xl border border-white/10 bg-[color:var(--surface)]/60 p-7 backdrop-blur-sm transition-colors duration-300 hover:border-primary/40"
+            >
+              <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/20 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100" />
+              <span className="relative font-heading text-xs text-[color:var(--purple-3)]">{number}</span>
+              <h3 className="relative mt-8 font-heading text-xl font-semibold">{title}</h3>
+              <p className="relative mt-3 text-sm leading-relaxed text-muted-foreground">{description}</p>
+            </motion.article>
           ))}
         </div>
       </section>

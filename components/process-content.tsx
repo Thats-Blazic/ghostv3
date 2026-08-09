@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { ArrowDownRight, Check } from 'lucide-react'
 import { FaIcon } from '@/components/fa-icon'
 import { CtaSection } from '@/components/cta-section'
+import { Eyebrow } from '@/components/shared'
 import { PROCESS_STEPS } from '@/lib/site-data'
 
 export function ProcessContent() {
@@ -13,11 +14,19 @@ export function ProcessContent() {
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <div className="grid-bg absolute inset-0 opacity-30 [mask-image:radial-gradient(ellipse_at_top,black,transparent_75%)]" />
           <div className="absolute left-[62%] top-8 h-[34rem] w-[34rem] rounded-full bg-primary/20 blur-[150px]" />
+          <motion.div
+            className="absolute left-[62%] top-8 h-[30rem] w-[30rem] opacity-50"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 32, repeat: Infinity, ease: 'linear' }}
+            style={{
+              background:
+                'conic-gradient(from 0deg, transparent 0%, rgba(192,132,252,0.35) 15%, transparent 35%, transparent 55%, rgba(124,58,237,0.3) 75%, transparent 100%)',
+              filter: 'blur(40px)',
+            }}
+          />
         </div>
         <div className="relative mx-auto max-w-7xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[color:var(--purple-3)]">
-            How we work
-          </p>
+          <Eyebrow>How we work</Eyebrow>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -46,21 +55,31 @@ export function ProcessContent() {
       </section>
 
       <section className="px-5 pb-24 sm:px-8 md:pb-36">
-        <div className="mx-auto grid max-w-7xl border-l border-t border-white/10 md:grid-cols-3">
+        <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-3">
           {[
             ['Transparent', 'You always know what we are doing, why it matters and what comes next.'],
             ['Collaborative', 'Frequent checkpoints keep your team involved without slowing the work down.'],
             ['Outcome-led', 'Every phase connects creative decisions to a clear business objective.'],
           ].map(([title, description], index) => (
-            <article key={title} className="min-h-64 border-b border-r border-white/10 p-8">
-              <span className="font-heading text-xs text-[color:var(--purple-3)]">
+            <motion.article
+              key={title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ y: -6 }}
+              data-cursor="hover"
+              className="group relative min-h-56 overflow-hidden rounded-3xl border border-white/10 bg-[color:var(--surface)]/60 p-8 backdrop-blur-sm transition-colors duration-300 hover:border-primary/40"
+            >
+              <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/20 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100" />
+              <span className="relative font-heading text-xs text-white/15 transition-colors duration-300 group-hover:text-[color:var(--purple-3)]/50">
                 0{index + 1}
               </span>
-              <h2 className="mt-16 font-heading text-2xl font-semibold">{title}</h2>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              <h2 className="relative mt-14 font-heading text-2xl font-semibold">{title}</h2>
+              <p className="relative mt-3 text-sm leading-relaxed text-muted-foreground">
                 {description}
               </p>
-            </article>
+            </motion.article>
           ))}
         </div>
       </section>

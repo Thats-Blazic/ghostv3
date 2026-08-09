@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { ArrowDownRight, ArrowUpRight, Check } from 'lucide-react'
-import { Counter } from '@/components/shared'
+import { Counter, Eyebrow } from '@/components/shared'
 import { FaIcon } from '@/components/fa-icon'
 import { CtaSection } from '@/components/cta-section'
 import { useLanguage } from '@/components/language-provider'
@@ -126,15 +126,24 @@ export function AboutContent() {
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <div className="grid-bg absolute inset-0 opacity-30 [mask-image:radial-gradient(ellipse_at_top,black,transparent_72%)]" />
           <div className="absolute left-[55%] top-20 h-[30rem] w-[30rem] rounded-full bg-primary/18 blur-[140px]" />
+          <motion.div
+            className="absolute left-[55%] top-20 h-[26rem] w-[26rem] opacity-50"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 32, repeat: Infinity, ease: 'linear' }}
+            style={{
+              background:
+                'conic-gradient(from 0deg, transparent 0%, rgba(192,132,252,0.35) 15%, transparent 35%, transparent 55%, rgba(124,58,237,0.3) 75%, transparent 100%)',
+              filter: 'blur(40px)',
+            }}
+          />
         </div>
         <div className="relative mx-auto max-w-7xl">
-          <motion.p
+          <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-xs font-semibold uppercase tracking-[0.25em] text-[color:var(--purple-3)]"
           >
-            {copy.eyebrow}
-          </motion.p>
+            <Eyebrow>{copy.eyebrow}</Eyebrow>
+          </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -163,18 +172,24 @@ export function AboutContent() {
       </section>
 
       <section className="px-5 pb-24 sm:px-8 md:pb-32">
-        <div className="mx-auto grid max-w-7xl grid-cols-2 border-y border-white/10 md:grid-cols-4">
-          {stats.map((stat, index) => (
-            <div
-              key={copy.stats[index]}
-              className="flex min-h-40 flex-col justify-center border-white/10 px-5 py-8 even:border-l md:border-l md:first:border-l-0"
-            >
-              <p className="font-heading text-4xl font-bold text-white sm:text-5xl">
-                <Counter value={stat.value} suffix={stat.suffix} />
-              </p>
-              <p className="mt-2 text-sm text-muted-foreground">{copy.stats[index]}</p>
-            </div>
-          ))}
+        <div className="mx-auto max-w-7xl overflow-hidden rounded-3xl border border-white/10 bg-white/[0.025] backdrop-blur-md">
+          <div className="grid grid-cols-2 md:grid-cols-4">
+            {stats.map((stat, index) => (
+              <div
+                key={copy.stats[index]}
+                className={`flex min-h-40 flex-col justify-center px-5 py-8 ${
+                  index % 2 !== 0 ? 'border-l border-white/10' : ''
+                } ${index > 1 ? 'border-t border-white/10 md:border-t-0' : ''} ${
+                  index > 0 ? 'md:border-l md:border-white/10' : ''
+                }`}
+              >
+                <p className="font-heading text-4xl font-bold text-gradient sm:text-5xl">
+                  <Counter value={stat.value} suffix={stat.suffix} />
+                </p>
+                <p className="mt-2 text-sm text-muted-foreground">{copy.stats[index]}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -202,27 +217,29 @@ export function AboutContent() {
           <h2 className="mt-5 font-heading text-4xl font-semibold tracking-tight sm:text-6xl">
             {copy.valuesTitle}
           </h2>
-          <div className="mt-14 grid border-l border-t border-white/10 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {copy.values.map((value, index) => (
               <motion.article
                 key={value.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.08 }}
-                className="group min-h-72 border-b border-r border-white/10 p-7 transition-colors hover:bg-white/[0.035]"
+                transition={{ delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: -6 }}
+                data-cursor="hover"
+                className="group relative min-h-64 overflow-hidden rounded-3xl border border-white/10 bg-[color:var(--surface)]/60 p-7 backdrop-blur-sm transition-colors duration-300 hover:border-primary/40"
               >
-                <div className="flex items-start justify-between">
-                  <FaIcon
-                    name={value.icon}
-                    className="h-6 w-6 text-[color:var(--purple-3)]"
-                  />
-                  <span className="font-heading text-xs text-muted-foreground">
+                <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/20 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100" />
+                <div className="relative flex items-start justify-between">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-[color:var(--purple-3)] transition-all duration-300 group-hover:border-primary/40 group-hover:bg-primary/10 group-hover:text-white">
+                    <FaIcon name={value.icon} className="h-5 w-5" />
+                  </span>
+                  <span className="font-heading text-xs text-white/15 transition-colors duration-300 group-hover:text-[color:var(--purple-3)]/50">
                     0{index + 1}
                   </span>
                 </div>
-                <h3 className="mt-20 font-heading text-2xl font-semibold">{value.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                <h3 className="relative mt-14 font-heading text-2xl font-semibold">{value.title}</h3>
+                <p className="relative mt-3 text-sm leading-relaxed text-muted-foreground">
                   {value.description}
                 </p>
               </motion.article>

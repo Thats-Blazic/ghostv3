@@ -1,9 +1,10 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowDownRight, Check } from 'lucide-react'
+import { ArrowDownRight, ArrowUpRight, Check } from 'lucide-react'
 import { FaIcon } from '@/components/fa-icon'
 import { CtaSection } from '@/components/cta-section'
+import { Eyebrow } from '@/components/shared'
 import { useLanguage } from '@/components/language-provider'
 import { SERVICES } from '@/lib/site-data'
 
@@ -95,11 +96,19 @@ export function ServicesContent() {
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <div className="grid-bg absolute inset-0 opacity-30 [mask-image:radial-gradient(ellipse_at_top,black,transparent_75%)]" />
           <div className="absolute left-1/2 top-12 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-primary/20 blur-[150px]" />
+          <motion.div
+            className="absolute left-1/2 top-12 h-[30rem] w-[30rem] -translate-x-1/2 opacity-50"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 32, repeat: Infinity, ease: 'linear' }}
+            style={{
+              background:
+                'conic-gradient(from 0deg, transparent 0%, rgba(192,132,252,0.35) 15%, transparent 35%, transparent 55%, rgba(124,58,237,0.3) 75%, transparent 100%)',
+              filter: 'blur(40px)',
+            }}
+          />
         </div>
         <div className="relative mx-auto max-w-7xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[color:var(--purple-3)]">
-            {copy.eyebrow}
-          </p>
+          <Eyebrow>{copy.eyebrow}</Eyebrow>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -134,12 +143,13 @@ export function ServicesContent() {
           <p className="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
             {copy.index}
           </p>
-          <div className="flex flex-wrap gap-x-8 gap-y-3">
+          <div className="flex flex-wrap gap-3">
             {localizedServices.map((service, index) => (
               <a
                 key={service.slug}
                 href={`#${service.slug}`}
-                className="group inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-white"
+                data-cursor="hover"
+                className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-sm text-muted-foreground transition-all hover:border-primary/40 hover:bg-primary/10 hover:text-white"
               >
                 <span className="font-heading text-[10px] text-[color:var(--purple-3)]">
                   {String(index + 1).padStart(2, '0')}
@@ -160,7 +170,7 @@ export function ServicesContent() {
             {copy.servicesTitle}
           </h2>
 
-          <div className="mt-14 grid border-l border-t border-white/10 md:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {localizedServices.map((service, index) => (
               <motion.article
                 id={service.slug}
@@ -168,24 +178,31 @@ export function ServicesContent() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.5, delay: (index % 3) * 0.07 }}
-                className="group relative min-h-80 scroll-mt-28 overflow-hidden border-b border-r border-white/10 p-7 transition-colors hover:bg-white/[0.035] sm:p-8"
+                transition={{ duration: 0.5, delay: (index % 3) * 0.07, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: -6 }}
+                data-cursor="hover"
+                className="group relative min-h-72 scroll-mt-28 overflow-hidden rounded-3xl border border-white/10 bg-[color:var(--surface)]/60 p-7 backdrop-blur-sm transition-colors duration-300 hover:border-primary/40 sm:p-8"
               >
-                <div className="absolute right-0 top-0 h-36 w-36 rounded-full bg-primary/0 blur-3xl transition-colors group-hover:bg-primary/15" />
+                <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/20 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100" />
                 <div className="relative flex items-start justify-between">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-primary/10 text-[color:var(--purple-3)] transition-transform duration-300 group-hover:-translate-y-1">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-[color:var(--purple-3)] transition-all duration-300 group-hover:border-primary/40 group-hover:bg-primary/10 group-hover:text-white">
                     <FaIcon name={service.icon} className="h-5 w-5" />
                   </span>
-                  <span className="font-heading text-xs text-muted-foreground">
+                  <span className="font-heading text-xs text-white/15 transition-colors duration-300 group-hover:text-[color:var(--purple-3)]/50">
                     {String(index + 1).padStart(2, '0')}
                   </span>
                 </div>
-                <h3 className="relative mt-16 font-heading text-2xl font-semibold">
+                <h3 className="relative mt-14 flex items-center gap-1.5 font-heading text-2xl font-semibold">
                   {service.title}
+                  <ArrowUpRight className="h-4 w-4 text-[color:var(--purple-3)] opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:opacity-100" />
                 </h3>
                 <p className="relative mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
                   {service.description}
                 </p>
+                <div
+                  aria-hidden
+                  className="relative mt-6 h-px w-full origin-left scale-x-0 bg-gradient-to-r from-[color:var(--purple-3)]/60 to-transparent transition-transform duration-500 group-hover:scale-x-100"
+                />
               </motion.article>
             ))}
           </div>

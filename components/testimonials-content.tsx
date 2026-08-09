@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Quote, Star } from 'lucide-react'
 import { CtaSection } from '@/components/cta-section'
+import { Eyebrow } from '@/components/shared'
 import { TESTIMONIALS } from '@/lib/site-data'
 
 export function TestimonialsContent() {
@@ -15,11 +16,19 @@ export function TestimonialsContent() {
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <div className="grid-bg absolute inset-0 opacity-30 [mask-image:radial-gradient(ellipse_at_top,black,transparent_75%)]" />
           <div className="absolute left-1/2 top-16 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-primary/20 blur-[150px]" />
+          <motion.div
+            className="absolute left-1/2 top-16 h-[30rem] w-[30rem] -translate-x-1/2 opacity-50"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 32, repeat: Infinity, ease: 'linear' }}
+            style={{
+              background:
+                'conic-gradient(from 0deg, transparent 0%, rgba(192,132,252,0.35) 15%, transparent 35%, transparent 55%, rgba(124,58,237,0.3) 75%, transparent 100%)',
+              filter: 'blur(40px)',
+            }}
+          />
         </div>
         <div className="relative mx-auto max-w-7xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[color:var(--purple-3)]">
-            Client stories
-          </p>
+          <Eyebrow>Client stories</Eyebrow>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -42,7 +51,7 @@ export function TestimonialsContent() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="relative mx-auto grid max-w-7xl overflow-hidden border border-white/10 bg-white/[0.025] lg:grid-cols-[0.72fr_1.28fr]"
+          className="relative mx-auto grid max-w-7xl overflow-hidden rounded-3xl border border-white/10 bg-white/[0.025] lg:grid-cols-[0.72fr_1.28fr]"
         >
           <div className="relative min-h-80 overflow-hidden bg-primary/10">
             <Image
@@ -95,17 +104,20 @@ export function TestimonialsContent() {
             </p>
           </div>
 
-          <div className="mt-14 grid border-l border-t border-white/10 md:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {TESTIMONIALS.slice(1).map((testimonial, index) => (
               <motion.article
                 key={testimonial.name}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: (index % 3) * 0.07 }}
-                className="flex min-h-96 flex-col border-b border-r border-white/10 p-7 transition-colors hover:bg-white/[0.035] sm:p-8"
+                transition={{ delay: (index % 3) * 0.07, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: -6 }}
+                data-cursor="hover"
+                className="group relative flex min-h-96 flex-col overflow-hidden rounded-3xl border border-white/10 bg-[color:var(--surface)]/60 p-7 backdrop-blur-sm transition-colors duration-300 hover:border-primary/40 sm:p-8"
               >
-                <div className="flex gap-1">
+                <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/20 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100" />
+                <div className="relative flex gap-1">
                   {Array.from({ length: testimonial.rating }).map((_, star) => (
                     <Star
                       key={star}
@@ -113,17 +125,18 @@ export function TestimonialsContent() {
                     />
                   ))}
                 </div>
-                <blockquote className="mt-10 flex-1 text-pretty text-lg leading-relaxed">
-                  “{testimonial.quote}”
+                <blockquote className="relative mt-10 flex-1 text-pretty text-lg leading-relaxed">
+                  &ldquo;{testimonial.quote}&rdquo;
                 </blockquote>
-                <div className="mt-10 flex items-center gap-3 border-t border-white/10 pt-6">
-                  <Image
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    width={48}
-                    height={48}
-                    className="h-12 w-12 rounded-full object-cover grayscale"
-                  />
+                <div className="relative mt-10 flex items-center gap-3 border-t border-white/10 pt-6">
+                  <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full ring-2 ring-primary/20">
+                    <Image
+                      src={testimonial.image}
+                      alt={testimonial.name}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
                   <div>
                     <p className="font-heading font-semibold">{testimonial.name}</p>
                     <p className="text-sm text-muted-foreground">{testimonial.channel}</p>

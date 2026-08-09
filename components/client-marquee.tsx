@@ -8,8 +8,14 @@ export function ClientMarquee() {
 
   return (
     <section className="relative border-y border-white/5 bg-white/[0.02] py-10">
-      <p className="mb-8 text-center text-xs font-medium uppercase tracking-[0.25em] text-muted-foreground">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 grid-bg opacity-[0.08] [mask-image:radial-gradient(ellipse_at_center,black,transparent_80%)]"
+      />
+      <p className="relative mb-8 flex items-center justify-center gap-3 text-center text-xs font-medium uppercase tracking-[0.25em] text-muted-foreground">
+        <span className="h-px w-8 bg-gradient-to-r from-transparent to-white/20" />
         Trusted by ambitious brands
+        <span className="h-px w-8 bg-gradient-to-l from-transparent to-white/20" />
       </p>
       <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
         <div className="animate-marquee flex w-max items-center gap-16 px-8 sm:gap-20">

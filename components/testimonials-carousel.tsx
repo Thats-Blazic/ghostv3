@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react'
 import { TESTIMONIALS } from '@/lib/site-data'
+import { cn } from '@/lib/utils'
 
 export function TestimonialsCarousel() {
   const [index, setIndex] = useState(0)
@@ -28,7 +29,15 @@ export function TestimonialsCarousel() {
   return (
     <div className="mx-auto max-w-3xl">
       <div className="border-gradient relative overflow-hidden rounded-3xl p-8 sm:p-12">
-        <Quote className="absolute right-8 top-8 h-16 w-16 text-primary/15" aria-hidden />
+        <div
+          aria-hidden
+          className="animate-blob pointer-events-none absolute -right-14 -top-14 h-56 w-56 rounded-full bg-primary/20 blur-[90px]"
+        />
+        <div
+          aria-hidden
+          className="animate-blob pointer-events-none absolute -bottom-16 -left-10 h-48 w-48 rounded-full bg-[color:var(--purple-3)]/12 blur-[90px] [animation-delay:-9s]"
+        />
+        <Quote className="pointer-events-none absolute right-8 top-8 h-16 w-16 text-primary/15" aria-hidden />
         <div className="relative min-h-56">
           <AnimatePresence mode="wait" custom={dir}>
             <motion.div
@@ -45,16 +54,17 @@ export function TestimonialsCarousel() {
                 ))}
               </div>
               <blockquote className="mt-5 text-pretty text-lg leading-relaxed text-foreground sm:text-xl">
-                “{t.quote}”
+                &ldquo;{t.quote}&rdquo;
               </blockquote>
               <div className="mt-7 flex items-center gap-4">
-                <Image
-                  src={t.image || '/placeholder.svg'}
-                  alt={t.name}
-                  width={56}
-                  height={56}
-                  className="h-14 w-14 rounded-full object-cover ring-2 ring-primary/30"
-                />
+                <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full ring-2 ring-primary/30">
+                  <Image
+                    src={t.image || '/placeholder.svg'}
+                    alt={t.name}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
                 <div>
                   <p className="font-heading font-semibold">{t.name}</p>
                   <p className="text-sm text-muted-foreground">{t.channel}</p>
@@ -65,36 +75,43 @@ export function TestimonialsCarousel() {
         </div>
       </div>
 
-      <div className="mt-6 flex items-center justify-center gap-4">
+      <div className="mt-8 flex items-center justify-center gap-3 sm:gap-4">
         <button
           type="button"
           aria-label="Previous testimonial"
           data-cursor="hover"
           onClick={() => go(index - 1)}
-          className="glass flex h-11 w-11 items-center justify-center rounded-full transition-colors hover:border-primary/40 hover:text-white"
+          className="glass flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition-colors hover:border-primary/40 hover:text-white"
         >
           <ChevronLeft className="h-5 w-5" />
         </button>
-        <div className="flex gap-2">
-          {TESTIMONIALS.map((_, i) => (
+
+        <div className="no-scrollbar flex items-center gap-2 overflow-x-auto px-1 sm:gap-3">
+          {TESTIMONIALS.map((creator, i) => (
             <button
-              key={i}
+              key={creator.name}
               type="button"
-              aria-label={`Go to testimonial ${i + 1}`}
+              aria-label={`Go to ${creator.name} testimonial`}
               data-cursor="hover"
               onClick={() => go(i)}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                i === index ? 'w-8 bg-[color:var(--purple-3)]' : 'w-2 bg-white/20'
-              }`}
-            />
+              className={cn(
+                'relative h-11 w-11 shrink-0 overflow-hidden rounded-full ring-2 transition-all duration-300',
+                i === index
+                  ? 'scale-110 ring-[color:var(--purple-3)]'
+                  : 'opacity-50 ring-white/10 hover:opacity-90',
+              )}
+            >
+              <Image src={creator.image || '/placeholder.svg'} alt={creator.name} fill className="object-cover" />
+            </button>
           ))}
         </div>
+
         <button
           type="button"
           aria-label="Next testimonial"
           data-cursor="hover"
           onClick={() => go(index + 1)}
-          className="glass flex h-11 w-11 items-center justify-center rounded-full transition-colors hover:border-primary/40 hover:text-white"
+          className="glass flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition-colors hover:border-primary/40 hover:text-white"
         >
           <ChevronRight className="h-5 w-5" />
         </button>

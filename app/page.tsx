@@ -26,8 +26,12 @@ export default function HomePage() {
       <ClientMarquee />
 
       {/* Services */}
-      <section className="relative px-6 py-24 md:py-32">
-        <div className="mx-auto max-w-7xl">
+      <section className="relative overflow-hidden px-6 py-24 md:py-32">
+        <div
+          aria-hidden
+          className="animate-blob pointer-events-none absolute -left-24 top-0 h-72 w-72 rounded-full bg-primary/10 blur-[120px]"
+        />
+        <div className="relative mx-auto max-w-7xl">
           <SectionHeading
             eyebrow={sr ? 'Šta radimo' : 'What We Do'}
             title={sr ? 'Usluge koje vaš brend izdvajaju' : 'Services built to make you unmissable'}
@@ -52,7 +56,7 @@ export default function HomePage() {
       </section>
 
       {/* Featured work */}
-      <section className="relative px-6 py-24 md:py-32">
+      <section className="relative border-t border-white/5 bg-white/[0.015] px-6 py-24 md:py-32">
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
             <SectionHeading
@@ -81,11 +85,17 @@ export default function HomePage() {
       </section>
 
       <WhyChooseUs />
-      <TechStack />
+      <div className="border-t border-white/5 bg-white/[0.015]">
+        <TechStack />
+      </div>
 
       {/* Testimonials */}
-      <section className="relative px-6 py-24 md:py-32">
-        <div className="mx-auto max-w-7xl">
+      <section className="relative overflow-hidden px-6 py-24 md:py-32">
+        <div
+          aria-hidden
+          className="animate-blob pointer-events-none absolute -right-24 top-10 h-72 w-72 rounded-full bg-[color:var(--purple-3)]/10 blur-[120px] [animation-delay:-5s]"
+        />
+        <div className="relative mx-auto max-w-7xl">
           <SectionHeading
             eyebrow="Creator voices"
             title="Trusted by YouTubers we work with"
@@ -98,8 +108,8 @@ export default function HomePage() {
       </section>
 
       {/* FAQ */}
-      <section className="relative px-6 py-24 md:py-32">
-        <div className="mx-auto max-w-3xl">
+      <section className="relative border-t border-white/5 bg-white/[0.015] px-6 py-24 md:py-32">
+        <div className="mx-auto max-w-5xl">
           <SectionHeading
             eyebrow="FAQ"
             title={sr ? 'Odgovori na važna pitanja' : 'Questions, answered'}

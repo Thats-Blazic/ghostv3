@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { ArrowDownRight, ArrowUpRight } from 'lucide-react'
 import { CtaSection } from '@/components/cta-section'
 import { PortfolioGallery } from '@/components/portfolio-gallery'
+import { Eyebrow } from '@/components/shared'
 import {
   PORTFOLIO,
   WEBSITE_PROJECTS,
@@ -21,11 +22,19 @@ export function ProjectsContent() {
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <div className="grid-bg absolute inset-0 opacity-30 [mask-image:radial-gradient(ellipse_at_top,black,transparent_75%)]" />
           <div className="absolute left-[58%] top-10 h-[34rem] w-[34rem] rounded-full bg-primary/20 blur-[150px]" />
+          <motion.div
+            className="absolute left-[58%] top-10 h-[30rem] w-[30rem] opacity-50"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 32, repeat: Infinity, ease: 'linear' }}
+            style={{
+              background:
+                'conic-gradient(from 0deg, transparent 0%, rgba(192,132,252,0.35) 15%, transparent 35%, transparent 55%, rgba(124,58,237,0.3) 75%, transparent 100%)',
+              filter: 'blur(40px)',
+            }}
+          />
         </div>
         <div className="relative mx-auto max-w-7xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[color:var(--purple-3)]">
-            Selected work
-          </p>
+          <Eyebrow>Selected work</Eyebrow>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -54,27 +63,29 @@ export function ProjectsContent() {
       </section>
 
       <section className="px-5 pb-24 sm:px-8 md:pb-36">
-        <div className="mx-auto grid max-w-7xl grid-cols-2 border-y border-white/10 md:grid-cols-4">
-          {[
-            [String(PORTFOLIO.length), 'Total projects'],
-            [String(countByType('website')), 'Live websites'],
-            [String(countByType('banner')), 'Brand campaigns'],
-            [String(countByType('thumbnail')), 'Visual stories'],
-          ].map(([value, label], index) => (
-            <div
-              key={label}
-              className={`flex min-h-36 flex-col justify-center px-5 py-7 ${
-                index % 2 ? 'border-l border-white/10' : ''
-              } ${index > 1 ? 'border-t border-white/10 md:border-t-0' : ''} ${
-                index > 0 ? 'md:border-l md:border-white/10' : ''
-              }`}
-            >
-              <span className="font-heading text-4xl font-bold text-white sm:text-5xl">
-                {value}
-              </span>
-              <span className="mt-2 text-sm text-muted-foreground">{label}</span>
-            </div>
-          ))}
+        <div className="mx-auto max-w-7xl overflow-hidden rounded-3xl border border-white/10 bg-white/[0.025] backdrop-blur-md">
+          <div className="grid grid-cols-2 md:grid-cols-4">
+            {[
+              [String(PORTFOLIO.length), 'Total projects'],
+              [String(countByType('website')), 'Live websites'],
+              [String(countByType('banner')), 'Brand campaigns'],
+              [String(countByType('thumbnail')), 'Visual stories'],
+            ].map(([value, label], index) => (
+              <div
+                key={label}
+                className={`flex min-h-36 flex-col justify-center px-5 py-7 ${
+                  index % 2 ? 'border-l border-white/10' : ''
+                } ${index > 1 ? 'border-t border-white/10 md:border-t-0' : ''} ${
+                  index > 0 ? 'md:border-l md:border-white/10' : ''
+                }`}
+              >
+                <span className="font-heading text-4xl font-bold text-gradient sm:text-5xl">
+                  {value}
+                </span>
+                <span className="mt-2 text-sm text-muted-foreground">{label}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -105,8 +116,10 @@ export function ProjectsContent() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.08 }}
-                className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.025]"
+                transition={{ delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: -6 }}
+                data-cursor="hover"
+                className="group overflow-hidden rounded-3xl border border-white/10 bg-white/[0.025] transition-colors duration-300 hover:border-primary/40"
               >
                 <div className="relative aspect-[4/3] overflow-hidden bg-black">
                   <Image
