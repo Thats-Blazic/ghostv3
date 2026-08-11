@@ -7,6 +7,7 @@ import { ClientMarquee } from '@/components/client-marquee'
 import { SectionHeading } from '@/components/shared'
 import { ServiceCard } from '@/components/service-card'
 import { PortfolioGallery } from '@/components/portfolio-gallery'
+import { TeamSection } from '@/components/team-section'
 import { WhyChooseUs } from '@/components/why-choose-us'
 import { TechStack } from '@/components/tech-stack'
 import { TestimonialsCarousel } from '@/components/testimonials-carousel'
@@ -83,6 +84,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <div className="border-t border-white/5 bg-white/[0.015]">
+        <TeamSection />
+      </div>
 
       <WhyChooseUs />
       <div className="border-t border-white/5 bg-white/[0.015]">

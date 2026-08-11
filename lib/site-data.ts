@@ -29,6 +29,28 @@ export const PARTNERS: Partner[] = [
   { name: 'Revolut', logo: '/partner/parner2.svg' },
 ]
 
+export type TeamMember = {
+  name: string
+  role: string
+  meta?: string
+  image: string
+}
+
+export const TEAM: TeamMember[] = [
+  {
+    name: 'Ognjen Blažić',
+    role: 'Graphic & Web Designer',
+    meta: '6+ years of experience',
+    image: '/team/ognjen-blazic.png',
+  },
+  {
+    name: 'Bojan Milenković',
+    role: 'Community Manager',
+    meta: '4+ years of experience',
+    image: '/team/bojan-milenkovic.png',
+  },
+]
+
 export type Service = {
   slug: string
   icon: string // font awesome class suffix
